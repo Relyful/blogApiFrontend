@@ -1,9 +1,10 @@
 // import { useState } from 'react'
 import { useEffect, useState } from "react"
 import styles from "./Header.module.css"
-import { Link } from 'react-router'
+import { Link, Outlet } from 'react-router'
 
 function App() {
+
   const [posts, setPosts] = useState([{title: 'My first post', message: 'body of my first post wow', createdAt: 'some time', comments: [], author: 'Rely'}]);
   useEffect( () => {
     const controller = new AbortController();
@@ -51,6 +52,7 @@ function App() {
    </header>
    <main>
     {postItems}
+    <Outlet />
    </main>
    </>
   )
