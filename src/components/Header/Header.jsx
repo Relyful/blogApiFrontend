@@ -9,6 +9,7 @@ function App() {
     <div className={`links ${styles.headerLinks}`}>
       <Link to="/">Home</Link>
       <Link to="/posts">Posts</Link>
+      <Link to="/login">Log In</Link>
     </div>
    </header>
    <main>
