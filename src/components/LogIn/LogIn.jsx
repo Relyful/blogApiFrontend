@@ -1,22 +1,29 @@
+import { useNavigate } from "react-router";
 import styles from "./LogIn.module.css"
+import { useState } from "react";
 
 export default function LogIn() {
+  const navigate = useNavigate();
+  const [ err, setErr ] = useState();
 
   async function handleLogIn(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const username = formData.get('username');
     const password = formData.get('password');
-    console.log('E target');
-    console.log(e.target);
     try {
       const requestBody = {username, password};
       const response = await fetch("http://localhost:8080/login", {method: 'POST', body: JSON.stringify(requestBody), headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}});
-      if (!response.ok) {
-        throw new Error('fetch error'); 
-      };
+      if (response.status === 401 || response.status === 400) {
+         setErr('Incorrect username of password');
+         throw new Error('Login failed');
+      } else if (!response.ok) {
+        throw new Error('Login Server Error');
+      }
       const responseData = await response.json();
-      console.log(responseData)
+      console.log(responseData);
+      localStorage.setItem("authToken", responseData);
+      navigate('/');
     } catch (err) {
       console.error(err);
     }
@@ -32,6 +39,7 @@ return (
       <input type="password" name="password" id="password" />
       <button type="submit">Submit</button>
     </form>
+    <p>{err}</p>
   </>
 )
 }
