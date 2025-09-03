@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 import styles from "./LogIn.module.css"
 import { useState } from "react";
 
 export default function LogIn() {
   const navigate = useNavigate();
   const [ err, setErr ] = useState();
+  const [setUser] = useOutletContext();
 
   async function handleLogIn(e) {
     e.preventDefault();
@@ -22,7 +23,8 @@ export default function LogIn() {
       }
       const responseData = await response.json();
       console.log(responseData);
-      localStorage.setItem("authToken", responseData);
+      setUser(responseData.userData);
+      localStorage.setItem("authToken", responseData.token);
       navigate('/');
     } catch (err) {
       console.error(err);

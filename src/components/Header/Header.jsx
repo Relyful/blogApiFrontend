@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [user, setUser] = useState({});
-  const jwt = localStorage.getItem("authToken");
+  let jwt = localStorage.getItem("authToken");
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -19,11 +19,10 @@ function App() {
           });
           if (!response.ok) {
             localStorage.removeItem("authToken");
-            setUser(undefined)         
+            setUser(undefined);
             throw new Error("Auth failed");
           }
           const data = await response.json();
-          console.log(data.user);
           setUser(data.user);
         } catch (err) {
           if (err.name === "AbortError") {
@@ -39,6 +38,12 @@ function App() {
     return () => controller.abort();
   }, [jwt]);
 
+  function logout() {
+    localStorage.removeItem("authToken");
+    jwt = null;
+    setUser({});
+  }
+
   return (
     <>
       <header className={styles.header}>
@@ -47,14 +52,17 @@ function App() {
           <Link to="/">Home</Link>
           <Link to="/posts">Posts</Link>
           {jwt ? (
-            <span>Username: {user.username}</span>
+            <>
+              <span>Username: {user.username}</span>
+              <span onClick={logout}>Logout</span>
+            </>
           ) : (
             <Link to="/login">Log In</Link>
           )}
         </div>
       </header>
       <main>
-        <Outlet />
+        <Outlet context={[setUser]} />
       </main>
     </>
   );
