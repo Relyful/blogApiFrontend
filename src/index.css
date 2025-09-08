@@ -75,3 +75,8 @@ textarea:not([rows]) {
 }
 
 /* CUSTOM CSS HERE */
+
+main {
+  display: flex;
+  justify-content: center;
+}

@@ -1,16 +1,9 @@
 import styles from "./Posts.module.css";
 import { useEffect, useState } from "react"
+import { Link } from "react-router";
 
 export default function Posts() {
-  const [posts, setPosts] = useState([
-    {
-      title: "My first post",
-      message: "body of my first post wow",
-      createdAt: "some time",
-      comments: [],
-      author: "Rely",
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -38,14 +31,16 @@ export default function Posts() {
 
   const postItems = posts.map((post) => {
     return (
-      <div className={`post ${styles.post}`} key={post.id}>
-        <div className="title">{post.title}</div>
-        <div className="message">{post.message}</div>
-        <div className="createdAt">{post.createdAt}</div>
-        {/* <div className="comments">Comments: {post.comments.length}</div> */}
-        <div className="author">{post.author}</div>
-      </div>
+      <Link to={`/posts/${post.id}`} key={post.id}>
+        <div className={`post ${styles.post}`}>
+          <div className="title">{post.title}</div>
+          <div className="message">{post.message}</div>
+          <div className="createdAt">{post.createdAt}</div>
+          {/* <div className="comments">Comments: {post.comments.length}</div> */}
+          <div className="author">{post.author}</div>
+        </div>
+      </Link>
     );
   });
-  return <>{postItems}</>;
+  return <div className={styles.posts}>{posts.length > 0 ? postItems : <p>No posts yet...</p>}</div>;
 }
