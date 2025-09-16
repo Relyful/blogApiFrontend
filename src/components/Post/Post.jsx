@@ -2,6 +2,20 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
+
+function Comments({ commentsData }) {
+  const commentsResult = commentsData.map(comment => {
+    return (
+      <div className="comment" key={comment.id}>
+        <p className="commentMessage">{comment.message}</p>
+        <p className="commentAuthor">{comment.author.username}</p>
+        <p className="commentCreatedAt">{comment.createdAt}</p>
+      </div>
+    )
+  });
+  return <>{commentsResult}</>;
+}
+
 export default function Post() {
   const { postId } = useParams();
   const [loading, setLoading] = useState(true);
@@ -49,7 +63,10 @@ export default function Post() {
     <div className="post">
       <div className="title">{post.title}</div>
       <div className="content">{post.message}</div>
-      <div className="comments">Comments will be here</div>
+      <div className="comments">
+        {post.comments.length < 1 ? <p>No comments yet.</p> : <Comments commentsData={post.comments}/>}
+      </div>
+      
     </div>
   );
 }
