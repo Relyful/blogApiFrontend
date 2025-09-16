@@ -13,3 +13,8 @@
   width: 60vw;
   gap: 2em;
 }
+
+.linkNoUnderscore {
+  color: black;
+  text-decoration: none;
+}

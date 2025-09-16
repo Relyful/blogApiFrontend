@@ -31,12 +31,12 @@ export default function Posts() {
 
   const postItems = posts.map((post) => {
     return (
-      <Link to={`/posts/${post.id}`} key={post.id}>
+      <Link to={`/posts/${post.id}`} key={post.id} className={styles.linkNoUnderscore}>
         <div className={`post ${styles.post}`}>
           <div className="title">{post.title}</div>
           <div className="message">{post.message}</div>
           <div className="createdAt">{post.createdAt}</div>
-          {/* <div className="comments">Comments: {post.comments.length}</div> */}
+          <div className="comments">Comments: {post._count.comments}</div>
           <div className="author">{post.author}</div>
         </div>
       </Link>
