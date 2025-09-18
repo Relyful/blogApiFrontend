@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
-
 function Comments({ commentsData }) {
   const commentsResult = commentsData.map(comment => {
     return (
@@ -14,6 +13,33 @@ function Comments({ commentsData }) {
     )
   });
   return <>{commentsResult}</>;
+}
+
+function NewCommentForm({ postId }) {
+
+  async function handleNewComment(e) {
+    const jwt = localStorage.getItem("authToken");
+    // TODO: ADD bearer token to request and accept it on backend and finish form
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const newComment = formData.get('newComment');
+    try {
+      const requestBody = {newComment};
+      const response = await fetch(`http://localhost:8080/${postId}/comments`, {method: 'POST', body: JSON.stringify(requestBody), headers: {'Content-Type': 'application/json'}});
+      if (!response.ok) {
+        throw new Error('Error posting data to server');
+      }
+    } catch(err) {
+      console.error(err);
+    }
+  }
+  return (
+    <form action={handleNewComment}>
+      <label htmlFor="newComment">New comment: </label>
+      <input type="text" name="newComment" id="newComment" />
+      <button type="submit">Comment</button>
+    </form>
+  )
 }
 
 export default function Post() {
@@ -64,6 +90,7 @@ export default function Post() {
       <div className="title">{post.title}</div>
       <div className="content">{post.message}</div>
       <div className="comments">
+        <NewCommentForm postId={postId}/> 
         {post.comments.length < 1 ? <p>No comments yet.</p> : <Comments commentsData={post.comments}/>}
       </div>
       
