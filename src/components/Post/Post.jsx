@@ -18,14 +18,23 @@ function Comments({ commentsData }) {
 function NewCommentForm({ postId }) {
 
   async function handleNewComment(e) {
+    console.log({'works': e});
     const jwt = localStorage.getItem("authToken");
-    // TODO: ADD bearer token to request and accept it on backend and finish form
+    // TODO: ADD bearer token to request and accept it on backend and finish formcod
     e.preventDefault();
     const formData = new FormData(e.target);
     const newComment = formData.get('newComment');
+    console.log(newComment);
     try {
-      const requestBody = {newComment};
-      const response = await fetch(`http://localhost:8080/${postId}/comments`, {method: 'POST', body: JSON.stringify(requestBody), headers: {'Content-Type': 'application/json'}});
+      const requestBody = {'message': newComment};
+      const response = await fetch(`http://localhost:8080/posts/${postId}/comments`, {
+        method: 'POST', 
+        body: JSON.stringify(requestBody), 
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          'Content-Type': 'application/json',
+        }
+      });
       if (!response.ok) {
         throw new Error('Error posting data to server');
       }
@@ -34,7 +43,7 @@ function NewCommentForm({ postId }) {
     }
   }
   return (
-    <form action={handleNewComment}>
+    <form onSubmit={handleNewComment}>
       <label htmlFor="newComment">New comment: </label>
       <input type="text" name="newComment" id="newComment" />
       <button type="submit">Comment</button>
