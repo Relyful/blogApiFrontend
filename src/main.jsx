@@ -7,6 +7,7 @@ import Header from './components/Header/Header.jsx'
 import LogIn from './components/LogIn/LogIn.jsx'
 import Posts from './components/Posts/Posts.jsx'
 import Post from './components/Post/Post.jsx'
+import Register from './components/Register/Register.jsx'
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       {index: true, element: <Posts />},
       {path: "login", element: <LogIn />},
       {path: "posts/:postId", element: <Post />},
+      {path: "register", element: <Register />},
     ]
   }
 ])

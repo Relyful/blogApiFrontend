@@ -57,7 +57,10 @@ function App() {
               <span onClick={logout}>Logout</span>
             </>
           ) : (
+            <>
+            <Link to="/register">Register</Link>
             <Link to="/login">Log In</Link>
+            </>
           )}
         </div>
       </header>
