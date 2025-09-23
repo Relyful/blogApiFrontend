@@ -41,7 +41,7 @@ function App() {
   function logout() {
     localStorage.removeItem("authToken");
     jwt = null;
-    setUser({});
+    setUser(undefined);
   }
 
   return (
@@ -62,7 +62,7 @@ function App() {
         </div>
       </header>
       <main>
-        <Outlet context={[setUser]} />
+        <Outlet context={{user, setUser}} />
       </main>
     </>
   );

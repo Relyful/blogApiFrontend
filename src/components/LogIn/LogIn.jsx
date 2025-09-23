@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function LogIn() {
   const navigate = useNavigate();
   const [ err, setErr ] = useState();
-  const [setUser] = useOutletContext();
+  const {setUser} = useOutletContext();
 
   async function handleLogIn(e) {
     e.preventDefault();

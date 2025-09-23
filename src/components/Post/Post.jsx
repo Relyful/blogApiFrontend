@@ -1,6 +1,6 @@
 // import styles from "./Post.module.css";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useOutletContext, useParams } from "react-router";
 
 function Comments({ commentsData }) {
   const commentsResult = commentsData.map(comment => {
@@ -20,11 +20,9 @@ function NewCommentForm({ postId }) {
   async function handleNewComment(e) {
     console.log({'works': e});
     const jwt = localStorage.getItem("authToken");
-    // TODO: ADD bearer token to request and accept it on backend and finish formcod
     e.preventDefault();
     const formData = new FormData(e.target);
     const newComment = formData.get('newComment');
-    console.log(newComment);
     try {
       const requestBody = {'message': newComment};
       const response = await fetch(`http://localhost:8080/posts/${postId}/comments`, {
@@ -55,6 +53,7 @@ export default function Post() {
   const { postId } = useParams();
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState(null);
+  const { user } = useOutletContext();
 
   useEffect(() => {
       const controller = new AbortController();
@@ -99,7 +98,8 @@ export default function Post() {
       <div className="title">{post.title}</div>
       <div className="content">{post.message}</div>
       <div className="comments">
-        <NewCommentForm postId={postId}/> 
+        {console.log(user)}
+        {user ? <NewCommentForm postId={postId}/> : <></>} 
         {post.comments.length < 1 ? <p>No comments yet.</p> : <Comments commentsData={post.comments}/>}
       </div>
       
