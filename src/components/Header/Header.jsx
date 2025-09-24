@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(undefined);
   let jwt = localStorage.getItem("authToken");
   useEffect(() => {
     const controller = new AbortController();

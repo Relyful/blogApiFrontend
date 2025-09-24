@@ -10,6 +10,7 @@ export default function Register() {
         <label htmlFor="repeatPassword">Repeat Password: </label>
         <input type="password" name="repeastPassword" id="repeatPassword" />
       </form>
+      {/* TODO: checkvalidity reportvalidity pouzi na overenie formy zacni s fetchom po validation */}
     </>
   )
 }
