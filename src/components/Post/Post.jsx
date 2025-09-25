@@ -98,7 +98,7 @@ export default function Post() {
       <div className="title">{post.title}</div>
       <div className="content">{post.message}</div>
       <div className="comments">
-        {user ? <NewCommentForm postId={postId}/> : <></>} 
+        {user ? <NewCommentForm postId={postId}/> : <>Login to add comments!</>} 
         {post.comments.length < 1 ? <p>No comments yet.</p> : <Comments commentsData={post.comments}/>}
       </div>
       

@@ -1,5 +1,9 @@
+import { useState } from "react";
+
 export default function Register() {
-  function handleRegisterForm(e) {
+  const [error, setError] = useState();
+
+  async function handleRegisterForm(e) {
     const form = e.target.form;
     console.log(form.elements.password);
     if (form.elements.password.value !== form.elements.repeatPassword.value) {
@@ -16,7 +20,7 @@ export default function Register() {
     const password = formData.get('password');
     try {
       const requestBody = {username, password};
-      const response = fetch(`http://localhost:8080/register`, {
+      const response = await fetch(`http://localhost:8080/register`, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -24,8 +28,13 @@ export default function Register() {
       }
     });
     if (!response.ok) {
+      console.log(response);
       throw new Error('Error posting data to server');
-    }
+    };
+    const responseData = await response.json();
+    if (responseData.error) {
+      setError(responseData.error);
+    };
     } catch (err) {
       console.error(err);
     }
@@ -35,6 +44,7 @@ export default function Register() {
 
     <>
       <h2>Join Rely's blog now!</h2>
+      {error ? <>{`${error}`}</> : <></>}
       <form>
         <label htmlFor="username">Username: </label>
         <input type="text" name="username" id="username" required minLength={5} />
