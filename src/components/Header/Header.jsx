@@ -51,7 +51,7 @@ function App() {
         <div className={`links ${styles.headerLinks}`}>
           <Link to="/">Home</Link>
           <Link to="/posts">Posts</Link>
-          {jwt ? (
+          {user ? (
             <>
               <span>Username: {user.username}</span>
               <span onClick={logout}>Logout</span>
