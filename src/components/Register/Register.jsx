@@ -11,6 +11,25 @@ export default function Register() {
       return;
     }
     e.preventDefault();
+    const formData = new FormData(form);
+    const username = formData.get('username');
+    const password = formData.get('password');
+    try {
+      const requestBody = {username, password};
+      const response = fetch(`http://localhost:8080/register`, {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!response.ok) {
+      throw new Error('Error posting data to server');
+    }
+    } catch (err) {
+      console.error(err);
+    }
+    
   }
   return (
 
