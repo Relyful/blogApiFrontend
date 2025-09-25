@@ -8,13 +8,15 @@ import LogIn from './components/LogIn/LogIn.jsx'
 import Posts from './components/Posts/Posts.jsx'
 import Post from './components/Post/Post.jsx'
 import Register from './components/Register/Register.jsx'
+import Home from './components/Home/Home.jsx';
 
 const router = createBrowserRouter([
   {
     path:"/",
     element: <Header />,
     children: [
-      {index: true, element: <Posts />},
+      {index: true, element: <Home />},
+      {path: "posts", element: <Posts />},
       {path: "login", element: <LogIn />},
       {path: "posts/:postId", element: <Post />},
       {path: "register", element: <Register />},
