@@ -37,7 +37,7 @@ export default function Posts() {
           <div className="message">{post.message}</div>
           <div className="createdAt">{post.createdAt}</div>
           <div className="comments">Comments: {post._count.comments}</div>
-          <div className="author">{post.author}</div>
+          <div className="author">{post.author.username}</div>
         </div>
       </Link>
     );
