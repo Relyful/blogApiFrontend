@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./Register.module.css";
 
 export default function Register() {
   const [error, setError] = useState();
@@ -6,6 +7,11 @@ export default function Register() {
   async function handleRegisterForm(e) {
     const form = e.target.form;
     console.log(form.elements.password);
+    if (form.elements.username.value.length > 10 || form.elements.username.value.length < 4) {
+      form.elements.username.setCustomValidity("Username too long or too short");
+    } else {
+      form.elements.username.setCustomValidity("");
+    }
     if (form.elements.password.value !== form.elements.repeatPassword.value) {
       form.elements.repeatPassword.setCustomValidity("Passwords do not match!");
     } else {
@@ -42,19 +48,21 @@ export default function Register() {
   }
   return (
 
-    <>
-      <h2>Join Rely's blog now!</h2>
-      {error ? <>{`${error}`}</> : <></>}
-      <form>
-        <label htmlFor="username">Username: </label>
-        <input type="text" name="username" id="username" required minLength={5} />
-        <label htmlFor="password">Password: </label>
-        <input type="password" name="password" id="password" />
-        <label htmlFor="repeatPassword">Repeat Password: </label>
-        <input type="password" name="repeatPassword" id="repeatPassword" />
-        <button type="submit" onClick={handleRegisterForm}>Register</button>
-      </form>
+    <div className={styles.register}>
+      <div className={styles.registerContent}>
+        <h2>Join Rely's blog now!</h2>
+        {error ? <p className={styles.error}>{`${error}`}</p> : <></>}
+        <form className={styles.mainForm}>
+          <label htmlFor="username">Username: </label>
+          <input type="text" name="username" id="username" required minLength={5} />
+          <label htmlFor="password">Password: </label>
+          <input type="password" name="password" id="password" />
+          <label htmlFor="repeatPassword">Repeat Password: </label>
+          <input type="password" name="repeatPassword" id="repeatPassword" />
+          <button type="submit" className={styles.button} onClick={handleRegisterForm}>Register</button>
+        </form>
+      </div>
       {/* TODO: checkvalidity reportvalidity pouzi na overenie formy zacni s fetchom po validation */}
-    </>
+    </div>
   )
 }
