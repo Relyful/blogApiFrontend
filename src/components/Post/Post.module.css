@@ -1,12 +1,21 @@
+.comments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .comment {
   padding-bottom: 1em;
   color: white;
+  max-width: 50em;
+  overflow: auto;
 }
 
 .post {  
   padding-bottom: 2em;
   color: white;
   margin-top: 2em;
+  margin-bottom: 5em;
 }
 
 .title {
@@ -49,12 +58,19 @@
   flex-direction: column;
   color: white;
   max-width: 33em;
+  margin-bottom: 4em;
 }
 
 .newCommentForm button {
   width: fit-content;
   align-self: center;
-  padding: 0.3em 0.8em;
+  padding: 0.5em 0.8em;
+  margin-top: 0.5em;
+  border-radius: 10px;
+  border: none;
+  background-color: #456882;
+  color: white;
+  cursor: pointer;
 }
 
 .newCommentForm textarea {

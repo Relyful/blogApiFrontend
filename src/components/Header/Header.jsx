@@ -53,8 +53,8 @@ function App() {
           <Link className={styles.linkContent} to="/posts">Posts</Link>
           {user ? (
             <>
-              <span>Username: {user.username}</span>
-              <span onClick={logout}>Logout</span>
+              <span className={styles.linkContent}>Username: {user.username}</span>
+              <span className={styles.linkContent} onClick={logout}>Logout</span>
             </>
           ) : (
             <>

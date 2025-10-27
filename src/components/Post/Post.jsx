@@ -105,7 +105,7 @@ export default function Post() {
         <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.content} dangerouslySetInnerHTML={{__html: post.message}}></div>
       </div>
-      <div className="comments">
+      <div className={styles.comments}>
         {user ? <NewCommentForm postId={postId}/> : <>Login to add comments!</>} 
         {post.comments.length < 1 ? <p className={styles.comment}>No comments yet.</p> : <Comments commentsData={post.comments}/>}
       </div>
