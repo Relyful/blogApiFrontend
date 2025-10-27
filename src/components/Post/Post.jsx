@@ -1,14 +1,20 @@
 // import styles from "./Post.module.css";
 import { useState, useEffect } from "react";
 import { useOutletContext, useParams } from "react-router";
+import styles from './Post.module.css';
 
 function Comments({ commentsData }) {
   const commentsResult = commentsData.map(comment => {
     return (
-      <div className="comment" key={comment.id}>
-        <p className="commentMessage">{comment.message}</p>
-        <p className="commentAuthor">{comment.author.username}</p>
-        <p className="commentCreatedAt">{comment.createdAt}</p>
+      <div className={`comment ${styles.comment}`} key={comment.id}>
+        <p className={styles.commentTitle}>{comment.author.username} said on {new Date(comment.createdAt).toLocaleDateString(undefined, {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric"
+          })}: </p>
+        <p className={styles.commentMessage}>{comment.message}</p>
       </div>
     )
   });
@@ -41,10 +47,10 @@ function NewCommentForm({ postId }) {
     }
   }
   return (
-    <form onSubmit={handleNewComment}>
+    <form className={styles.newCommentForm} onSubmit={handleNewComment}>
       <label htmlFor="newComment">New comment: </label>
-      <input type="text" name="newComment" id="newComment" />
-      <button type="submit">Comment</button>
+      <textarea name="newComment" id="newComment" rows={2} cols={33} />
+      <button type="submit">Add Comment</button>
     </form>
   )
 }
@@ -94,12 +100,14 @@ export default function Post() {
   }
 
   return (
-    <div className="post">
-      <div className="title">{post.title}</div>
-      <div className="content" dangerouslySetInnerHTML={{__html: post.message}} />
+    <div className={`post ${styles.postContainer}`}>
+      <div className={`blogPost ${styles.post}`}>
+        <h1 className={styles.title}>{post.title}</h1>
+        <div className={styles.content} dangerouslySetInnerHTML={{__html: post.message}}></div>
+      </div>
       <div className="comments">
         {user ? <NewCommentForm postId={postId}/> : <>Login to add comments!</>} 
-        {post.comments.length < 1 ? <p>No comments yet.</p> : <Comments commentsData={post.comments}/>}
+        {post.comments.length < 1 ? <p className={styles.comment}>No comments yet.</p> : <Comments commentsData={post.comments}/>}
       </div>
       
     </div>

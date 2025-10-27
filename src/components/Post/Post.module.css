@@ -1,0 +1,64 @@
+.comment {
+  padding-bottom: 1em;
+  color: white;
+}
+
+.post {  
+  padding-bottom: 2em;
+  color: white;
+  margin-top: 2em;
+}
+
+.title {
+  color: #D2C1B6;
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 35%;
+  min-width: 35%;
+}
+
+.content {
+  margin-top: 3em;
+}
+
+.commentTitle {
+  color: #D2C1B6
+}
+
+.commentMessage {
+  padding-left: 1em;
+}
+
+.commentButton {
+  width: fit-content;
+  align-self: center;
+  padding: 0.2em 0.5em;
+  background-color: #F9F3EF;
+  border: none;
+  border-radius: 5px;
+  color: red;
+  margin-top: 0.5em;
+}
+
+.newCommentForm {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  max-width: 33em;
+}
+
+.newCommentForm button {
+  width: fit-content;
+  align-self: center;
+  padding: 0.3em 0.8em;
+}
+
+.newCommentForm textarea {
+  resize: vertical;
+  max-height: 8em;
+  min-height: 2em;
+}
