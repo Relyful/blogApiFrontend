@@ -7,6 +7,11 @@
   background-color: #456882;
   border-radius: 25px;
   color: white;
+  transition: transform .2s ease-in-out;
+}
+
+.post:hover {
+  transform: scale(1.01);
 }
 
 .posts {
@@ -17,7 +22,7 @@
   flex-direction: column;
   width: 60vw;
   gap: 2em;
-}
+} 
 
 .adminRow {
   padding-top: 1em;
