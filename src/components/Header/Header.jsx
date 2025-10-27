@@ -47,10 +47,10 @@ function App() {
   return (
     <>
       <header className={styles.header}>
-        <h1 className="logo">Rely's Blog</h1>
+        <Link to='/' className={`logo ${styles.logo}`}><h2>Rely's Blog</h2></Link>
         <div className={`links ${styles.headerLinks}`}>
-          <Link to="/">Home</Link>
-          <Link to="/posts">Posts</Link>
+          <Link className={styles.linkContent} to="/">Home</Link>
+          <Link className={styles.linkContent} to="/posts">Posts</Link>
           {user ? (
             <>
               <span>Username: {user.username}</span>
@@ -58,8 +58,8 @@ function App() {
             </>
           ) : (
             <>
-            <Link to="/register">Register</Link>
-            <Link to="/login">Log In</Link>
+            <Link className={styles.linkContent} to="/register">Register</Link>
+            <Link className={styles.linkContent} to="/login">Log In</Link>
             </>
           )}
         </div>

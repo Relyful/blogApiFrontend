@@ -33,11 +33,11 @@ export default function Posts() {
     return (
       <Link to={`/posts/${post.id}`} key={post.id} className={styles.linkNoUnderscore}>
         <div className={`post ${styles.post}`}>
-          <div className="title">{post.title}</div>
-          <div className="message">{post.message}</div>
-          <div className="createdAt">{post.createdAt}</div>
+          <div className="title"><h2>{post.title}</h2></div>
+          <div className="message" dangerouslySetInnerHTML={{__html: post.message}} />
+          <div className="createdAt">Created: {new Date(post.createdAt).toLocaleDateString(undefined, {day: 'numeric', month: 'long', year: 'numeric'})}</div>
           <div className="comments">Comments: {post._count.comments}</div>
-          <div className="author">{post.author.username}</div>
+          <div className="author">Author: {post.author.username}</div>
         </div>
       </Link>
     );
