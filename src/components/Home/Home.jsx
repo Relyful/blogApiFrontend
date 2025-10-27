@@ -3,9 +3,13 @@ import { Link } from "react-router";
 
 export default function Home() {
   return (
-    <div className={styles.banner}>
-      <h1>Welcome to <br/>Rely's Blog</h1>
-      <Link to="posts" className={styles.button}>Enter</Link>
+    <div className={`${styles.banner} banner`}>
+      <Link to="posts" className={styles.linkContent}>
+        <div className={styles.bannerContent}>
+          <h1 className={styles.h1}>Welcome to <br/>Rely's Blog</h1>
+          <div className={styles.button}>Enter</div>
+        </div>
+      </Link>
     </div>
   )
 }
