@@ -32,7 +32,7 @@ export default function LogIn() {
       console.log(responseData);
       setUser(responseData.userData);
       localStorage.setItem("authToken", responseData.token);
-      navigate(-1);
+      navigate("/posts");
     } catch (err) {
       console.error(err);
     }
