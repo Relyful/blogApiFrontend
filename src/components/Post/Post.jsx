@@ -48,8 +48,7 @@ function NewCommentForm({ postId }) {
   }
   return (
     <form className={styles.newCommentForm} onSubmit={handleNewComment}>
-      <label htmlFor="newComment">New comment: </label>
-      <textarea name="newComment" id="newComment" rows={2} cols={33} />
+      <textarea placeholder="Leave a comment!" name="newComment" id="newComment" rows={2} cols={40} />
       <button type="submit">Add Comment</button>
     </form>
   )
