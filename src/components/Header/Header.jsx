@@ -1,9 +1,10 @@
 import styles from "./Header.module.css";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
 function App() {
   const [user, setUser] = useState(undefined);
+  const navigate = useNavigate();
   let jwt = localStorage.getItem("authToken");
   useEffect(() => {
     const controller = new AbortController();
@@ -42,6 +43,7 @@ function App() {
     localStorage.removeItem("authToken");
     jwt = null;
     setUser(undefined);
+    navigate('/');
   }
 
   return (
