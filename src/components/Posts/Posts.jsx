@@ -7,7 +7,7 @@ export default function Posts() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const backendAddress =
-    import.meta.env.VITE_BACKEND_ADDRESS || 'http://localhost:8080';
+      import.meta.env.VITE_BACKEND_ADDRESS || "http://localhost:8080";
     const controller = new AbortController();
     const signal = controller.signal;
     const fetchPosts = async () => {
@@ -40,7 +40,7 @@ export default function Posts() {
         className={styles.linkNoUnderscore}
       >
         <div className={`post ${styles.post}`}>
-            <h2 className={`title, ${styles.title}`}>{post.title}</h2>
+          <h2 className={`title, ${styles.title}`}>{post.title}</h2>
           <div
             className={styles.message}
             dangerouslySetInnerHTML={{ __html: post.message }}
@@ -52,7 +52,7 @@ export default function Posts() {
               month: "long",
               year: "numeric",
               hour: "numeric",
-              minute: "numeric"
+              minute: "numeric",
             })}
           </div>
           <div className="comments">Comments: {post._count.comments}</div>

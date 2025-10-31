@@ -1,11 +1,15 @@
 import { useState } from "react";
 import styles from "./Register.module.css";
+import { useNavigate } from "react-router";
 
 export default function Register() {
   const [error, setError] = useState();
+  const navigate = useNavigate()
 
   async function handleRegisterForm(e) {
-    const form = e.target.form;
+    e.preventDefault();
+    const form = e.target;
+    setError(``);
     console.log(form.elements.password);
     if (form.elements.username.value.length > 10 || form.elements.username.value.length < 4) {
       form.elements.username.setCustomValidity("Username too long or too short");
@@ -20,7 +24,6 @@ export default function Register() {
     if (!form.reportValidity()) {
       return;
     }
-    e.preventDefault();
     const formData = new FormData(form);
     const username = formData.get('username');
     const password = formData.get('password');
@@ -41,12 +44,12 @@ export default function Register() {
     };
     const responseData = await response.json();
     if (responseData.error) {
-      setError(responseData.error);
+      return setError(responseData.error);
     };
+    return navigate('/login');
     } catch (err) {
       console.error(err);
     }
-    
   }
   return (
 
@@ -54,14 +57,14 @@ export default function Register() {
       <div className={styles.registerContent}>
         <h2>Join Rely's blog now!</h2>
         {error ? <p className={styles.error}>{`${error}`}</p> : <></>}
-        <form className={styles.mainForm}>
+        <form className={styles.mainForm} onSubmit={handleRegisterForm}>
           <label htmlFor="username">Username: </label>
-          <input type="text" name="username" id="username" required minLength={5} />
+          <input type="text" name="username" id="username" required />
           <label htmlFor="password">Password: </label>
           <input type="password" name="password" id="password" />
           <label htmlFor="repeatPassword">Repeat Password: </label>
           <input type="password" name="repeatPassword" id="repeatPassword" />
-          <button type="submit" className={styles.button} onClick={handleRegisterForm}>Register</button>
+          <button type="submit" className={styles.button} >Register</button>
         </form>
       </div>
     </div>
