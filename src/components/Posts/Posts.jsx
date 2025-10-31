@@ -6,11 +6,13 @@ export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    const backendAddress =
+    import.meta.env.VITE_BACKEND_ADDRESS || 'http://localhost:8080';
     const controller = new AbortController();
     const signal = controller.signal;
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:8080/posts", { signal });
+        const response = await fetch(`${backendAddress}/posts`, { signal });
         if (!response.ok) {
           throw new Error("Fetch error");
         }

@@ -79,3 +79,7 @@
   max-height: 8em;
   min-height: 2em;
 }
+
+.whiteText {
+  color: white;
+}

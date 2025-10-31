@@ -32,10 +32,12 @@ function NewCommentForm({ postId, onNewComment }) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const newComment = formData.get("newComment");
+    const backendAddress =
+      import.meta.env.VITE_BACKEND_ADDRESS || 'http://localhost:8080';
     try {
       const requestBody = { message: newComment };
       const response = await fetch(
-        `http://localhost:8080/posts/${postId}/comments`,
+        `${backendAddress}/posts/${postId}/comments`,
         {
           method: "POST",
           body: JSON.stringify(requestBody),
@@ -79,9 +81,11 @@ export default function Post() {
     const controller = new AbortController();
     const signal = controller.signal;
     const jwt = localStorage.getItem("authToken");
+    const backendAddress =
+      import.meta.env.VITE_BACKEND_ADDRESS || 'http://localhost:8080';
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/posts/${postId}`, {
+        const response = await fetch(`${backendAddress}/posts/${postId}`, {
           signal,
           headers: {
             Authorization: `Bearer ${jwt}`,
@@ -135,7 +139,7 @@ export default function Post() {
         {user ? (
           <NewCommentForm postId={postId} onNewComment={onNewComment} />
         ) : (
-          <>Login to add comments!</>
+          <div className={styles.whiteText}>Login to add comments!</div>
         )}
         {post.comments.length < 1 ? (
           <p className={styles.comment}>No comments yet.</p>

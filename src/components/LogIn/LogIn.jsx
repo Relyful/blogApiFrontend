@@ -12,9 +12,11 @@ export default function LogIn() {
     const formData = new FormData(e.target);
     const username = formData.get("username");
     const password = formData.get("password");
+    const backendAddress =
+      import.meta.env.VITE_BACKEND_ADDRESS || 'http://localhost:8080';
     try {
       const requestBody = { username, password };
-      const response = await fetch("http://localhost:8080/login", {
+      const response = await fetch(`${backendAddress}/login`, {
         method: "POST",
         body: JSON.stringify(requestBody),
         headers: {

@@ -24,9 +24,11 @@ export default function Register() {
     const formData = new FormData(form);
     const username = formData.get('username');
     const password = formData.get('password');
+    const backendAddress =
+      import.meta.env.VITE_BACKEND_ADDRESS || 'http://localhost:8080';
     try {
       const requestBody = {username, password};
-      const response = await fetch(`http://localhost:8080/register`, {
+      const response = await fetch(`${backendAddress}/register`, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -62,7 +64,6 @@ export default function Register() {
           <button type="submit" className={styles.button} onClick={handleRegisterForm}>Register</button>
         </form>
       </div>
-      {/* TODO: checkvalidity reportvalidity pouzi na overenie formy zacni s fetchom po validation */}
     </div>
   )
 }

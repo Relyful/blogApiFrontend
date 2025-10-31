@@ -9,10 +9,12 @@ function App() {
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
+    const backendAddress =
+      import.meta.env.VITE_BACKEND_ADDRESS || 'http://localhost:8080';
     if (jwt) {
       async function authUser() {
         try {
-          const response = await fetch("http://localhost:8080/auth", {
+          const response = await fetch(`${backendAddress}/auth`, {
             signal,
             headers: {
               Authorization: `Bearer ${jwt}`,
