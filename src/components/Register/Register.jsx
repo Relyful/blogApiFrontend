@@ -8,22 +8,23 @@ export default function Register() {
 
   async function handleRegisterForm(e) {
     e.preventDefault();
-    const form = e.target;
     setError(``);
+    const form = e.target;
     console.log(form.elements.password);
-    if (form.elements.username.value.length > 10 || form.elements.username.value.length < 4) {
-      form.elements.username.setCustomValidity("Username too long or too short");
-    } else {
-      form.elements.username.setCustomValidity("");
-    }
-    if (form.elements.password.value !== form.elements.repeatPassword.value) {
-      form.elements.repeatPassword.setCustomValidity("Passwords do not match!");
-    } else {
-      form.elements.repeatPassword.setCustomValidity("");
-    }
-    if (!form.reportValidity()) {
-      return;
-    }
+    // const usernameInput = form.elements.username;
+    // console.log("Username:", usernameInput.value, "Length:", usernameInput.value.length);
+    // usernameInput.setCustomValidity("");
+    // if (usernameInput.value.length > 10 || usernameInput.value.length < 4) {
+    //   usernameInput.setCustomValidity("Username too long or too short");
+    // }
+    // const repeatInput = form.elements.repeatPassword;
+    // repeatInput.setCustomValidity("");
+    // if (form.elements.password.value !== repeatInput.value) {
+    //   repeatInput.setCustomValidity("Passwords do not match!");
+    // }
+    // if (!form.reportValidity()) {
+    //   return;
+    // }
     const formData = new FormData(form);
     const username = formData.get('username');
     const password = formData.get('password');
