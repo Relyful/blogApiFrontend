@@ -1,6 +1,7 @@
 import styles from "./Header.module.css";
 import { Link, Outlet, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import Footer from "../Footer/Footer";
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -71,6 +72,7 @@ function App() {
       <main>
         <Outlet context={{user, setUser}} />
       </main>
+      <Footer />
     </>
   );
 }
