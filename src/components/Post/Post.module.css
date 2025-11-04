@@ -35,7 +35,9 @@
 }
 
 .commentTitle {
-  color: #D2C1B6
+  color: #D2C1B6;
+  display: flex;
+  justify-content: space-between;
 }
 
 .commentMessage {
@@ -83,4 +85,13 @@
 .whiteText {
   color: white;
   padding-bottom: 1em;
+}
+
+.commentDeleteButton {
+  margin-left: 3em;
+  border: none;
+  background-color: #456882;
+  padding: 0.3em;
+  color: #F9F3EF;
+  border-radius: 5px;
 }

@@ -23,6 +23,7 @@ function Comments({ commentsData, user, onRequestDelete }) {
                 <button
                   onClick={() => onRequestDelete(comment.id)}
                   type="button"
+                  className={styles.commentDeleteButton}
                 >
                   Delete
                 </button>
