@@ -45,7 +45,7 @@ export default function Register() {
     };
     const responseData = await response.json();
     if (responseData.error) {
-      setError(responseData.error);
+      return setError(responseData.error);
     };
     navigate('/login');
     } catch (err) {
