@@ -18,7 +18,7 @@ function Comments({ commentsData, user, onRequestDelete }) {
               minute: "numeric",
             })}
             :{" "}
-            {user.id === comment.authorId && (
+            {user?.id === comment.authorId && (
               <span className={styles.editMenu}>
                 <button
                   onClick={() => onRequestDelete(comment.id)}
